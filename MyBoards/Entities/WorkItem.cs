@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyBoards.Entities
 {
@@ -6,9 +8,9 @@ namespace MyBoards.Entities
     {
         [Key]
         public int Id { get; set; }
-
         public string State { get; set; }
         public string Area { get; set; }
+
         public string IterationPath { get; set; }
         public int Priority { get; set; }
         // Epic
