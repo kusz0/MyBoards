@@ -32,7 +32,8 @@ namespace MyBoards.Entities
             });
             modelBuilder.Entity<Comment>(eb =>
             {
-                eb.Property(x => x.CreatedDate).HasDefaultValueSql("");
+                eb.Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
+                eb.Property(x => x.UpdateTime).ValueGeneratedOnUpdate();
             });
 
         }
