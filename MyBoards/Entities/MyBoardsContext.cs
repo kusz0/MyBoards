@@ -36,6 +36,8 @@ namespace MyBoards.Entities
                 eb.Property(x => x.UpdateTime).ValueGeneratedOnUpdate();
             });
 
+            modelBuilder.Entity<User>().HasOne(u => u.Address).WithOne(a => a.User).HasForeignKey<Address>(a => a.UserId);
+
         }
         
     }
