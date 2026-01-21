@@ -21,8 +21,6 @@ namespace MyBoards.Entities
         {
             modelBuilder.Entity<WorkItem>(eb =>
             {
-                eb.Property(x => x.State).IsRequired();
-                eb.Property(x => x.State).HasMaxLength(50);
                 eb.Property(x => x.Area).HasColumnType("varchar200");
                 eb.Property(wi => wi.IterationPath).HasColumnName("Iteration_Path");
                 eb.Property(wi => wi.EndDate).HasPrecision(3);
