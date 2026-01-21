@@ -32,7 +32,17 @@ namespace MyBoards.Entities
 
                 eb.HasMany(w => w.Comments).WithOne(c => c.WorkItem).HasForeignKey(c => c.WorkItemId);
                 eb.HasOne(w => w.Author).WithMany(u => u.WorkItems).HasForeignKey(w => w.AuthorId);
-            
+
+
+                eb.HasMany(w => w.Tags).WithMany(t => t.WorkItems).UsingEntity<WorkItemTag>(
+                    w => w.HasOne(wit => wit.Tag).WithMany().HasForeignKey(w => w.TagId),
+                    w => w.HasOne(wit => wit.WorkItemT).WithMany().HasForeignKey(w => w.WorkItemId),
+                    wit =>
+                    {
+                        wit.HasKey(x => new { x.TagId, x.WorkItemId });
+                        wit.Property(x => x.PublicationDate).HasDefaultValueSql("getutcdate()");
+                    }
+                    );
             });
             modelBuilder.Entity<Comment>(eb =>
             {
@@ -42,9 +52,9 @@ namespace MyBoards.Entities
 
             // Relations
             modelBuilder.Entity<User>().HasOne(u => u.Address).WithOne(a => a.User).HasForeignKey<Address>(a => a.UserId);
+
+
             
-
-
 
         }
         
