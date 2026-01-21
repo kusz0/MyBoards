@@ -22,6 +22,7 @@ namespace MyBoards.Entities
             modelBuilder.Entity<WorkItem>(eb =>
             {
                 eb.Property(x => x.State).IsRequired();
+                eb.Property(x => x.State).HasMaxLength(50);
                 eb.Property(x => x.Area).HasColumnType("varchar200");
                 eb.Property(wi => wi.IterationPath).HasColumnName("Iteration_Path");
                 eb.Property(wi => wi.EndDate).HasPrecision(3);
@@ -53,7 +54,10 @@ namespace MyBoards.Entities
             // Relations
             modelBuilder.Entity<User>().HasOne(u => u.Address).WithOne(a => a.User).HasForeignKey<Address>(a => a.UserId);
 
-
+            modelBuilder.Entity<State>(st =>
+            {
+                st.Property(x => x.Name).IsRequired().HasMaxLength(50);
+            });
             
 
         }
