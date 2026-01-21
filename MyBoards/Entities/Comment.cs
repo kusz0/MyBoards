@@ -9,5 +9,10 @@
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdateTime { get; set; }
 
+        public WorkItem WorkItem { get; set; }
+        public int WorkItemId { get; set; }
+
+
+
     }
 }
