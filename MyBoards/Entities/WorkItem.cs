@@ -30,8 +30,8 @@ namespace MyBoards.Entities
 
         public List<Tag> Tags { get; set; }
 
-
-
+        public int StateId { get; set; }
+        public State State { get; set; }
 
     }
 }

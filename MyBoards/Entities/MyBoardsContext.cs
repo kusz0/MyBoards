@@ -16,6 +16,7 @@ namespace MyBoards.Entities
         public DbSet<Tag> TagsDb { get; set; }
         public DbSet<Comment> CommentsDb { get; set; }
         public DbSet<Address> AddressesDb { get; set; }
+        public DbSet<State> StatesDb { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,7 +32,7 @@ namespace MyBoards.Entities
 
                 eb.HasMany(w => w.Comments).WithOne(c => c.WorkItem).HasForeignKey(c => c.WorkItemId);
                 eb.HasOne(w => w.Author).WithMany(u => u.WorkItems).HasForeignKey(w => w.AuthorId);
-
+                eb.HasOne(s => s.State).WithMany(u => u.WorkItems).HasForeignKey(w =>w.StateId);
 
                 eb.HasMany(w => w.Tags).WithMany(t => t.WorkItems).UsingEntity<WorkItemTag>(
                     w => w.HasOne(wit => wit.Tag).WithMany().HasForeignKey(w => w.TagId),
@@ -54,7 +55,7 @@ namespace MyBoards.Entities
 
             modelBuilder.Entity<State>(st =>
             {
-                st.Property(x => x.Name).IsRequired().HasMaxLength(50);
+                st.Property(x => x.Value).IsRequired().HasMaxLength(50);
             });
             
 
