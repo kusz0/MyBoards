@@ -1,4 +1,6 @@
-﻿namespace MyBoards.Entities
+﻿using MyBoards.Entities.WorkItems;
+
+namespace MyBoards.Entities
 {
     public class Comment
     {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyBoards.Entities.WorkItems;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyBoards.Entities
 {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MyBoards.Entities.WorkItems;
 using System.Reflection.Metadata.Ecma335;
+using Task = MyBoards.Entities.WorkItems.Task;
 
 namespace MyBoards.Entities
 {
@@ -12,6 +14,9 @@ namespace MyBoards.Entities
         }
 
         public DbSet<WorkItem> WorkItemsDb{ get; set; }
+        public DbSet<Epic> EpicDb{ get; set; }
+        public DbSet<Task> TaskDb{ get; set; }
+        public DbSet<Issue> IssueDb { get; set; }
         public DbSet<User> UsersDb { get; set; }
         public DbSet<Tag> TagsDb { get; set; }
         public DbSet<Comment> CommentsDb { get; set; }
@@ -24,10 +29,6 @@ namespace MyBoards.Entities
             {
                 eb.Property(x => x.Area).HasColumnType("varchar200");
                 eb.Property(wi => wi.IterationPath).HasColumnName("Iteration_Path");
-                eb.Property(wi => wi.EndDate).HasPrecision(3);
-                eb.Property(wi => wi.Efford).HasColumnType("decimal(5,2)");
-                eb.Property(wi => wi.Activity).HasMaxLength(200);
-                eb.Property(wi => wi.RemaningWork).HasPrecision(14,2);
                 eb.Property(wi => wi.Priority).HasDefaultValue(1);
 
                 eb.HasMany(w => w.Comments).WithOne(c => c.WorkItem).HasForeignKey(c => c.WorkItemId);
@@ -43,6 +44,19 @@ namespace MyBoards.Entities
                         wit.Property(x => x.PublicationDate).HasDefaultValueSql("getutcdate()");
                     }
                     );
+            });
+            modelBuilder.Entity<Epic>(e =>
+            {
+                e.Property(x => x.EndDate).HasPrecision(3);
+            });
+            modelBuilder.Entity<Task>(t =>
+            {
+                t.Property(x => x.Activity).HasMaxLength(200);
+                t.Property(x => x.RemaningWork).HasPrecision(14,2);
+            });
+            modelBuilder.Entity<Issue>(i =>
+            {
+                i.Property(x => x.Efford).HasColumnType("decimal(5,2)");
             });
             modelBuilder.Entity<Comment>(eb =>
             {
