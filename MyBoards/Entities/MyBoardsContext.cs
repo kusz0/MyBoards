@@ -27,7 +27,7 @@ namespace MyBoards.Entities
         {
             modelBuilder.Entity<WorkItem>(eb =>
             {
-                eb.Property(x => x.Area).HasColumnType("varchar200");
+                eb.Property(x => x.Area).HasColumnType("varchar(200)");
                 eb.Property(wi => wi.IterationPath).HasColumnName("Iteration_Path");
                 eb.Property(wi => wi.Priority).HasDefaultValue(1);
 
@@ -45,18 +45,12 @@ namespace MyBoards.Entities
                     }
                     );
             });
-            modelBuilder.Entity<Epic>(e =>
-            {
-                e.Property(x => x.EndDate).HasPrecision(3);
-            });
+            modelBuilder.Entity<Epic>().Property(x => x.EndDate).HasPrecision(3);
+            modelBuilder.Entity<Issue>().Property(x => x.Efford).HasColumnType("decimal(5,2)");
             modelBuilder.Entity<Task>(t =>
             {
                 t.Property(x => x.Activity).HasMaxLength(200);
                 t.Property(x => x.RemaningWork).HasPrecision(14,2);
-            });
-            modelBuilder.Entity<Issue>(i =>
-            {
-                i.Property(x => x.Efford).HasColumnType("decimal(5,2)");
             });
             modelBuilder.Entity<Comment>(eb =>
             {

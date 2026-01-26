@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.NetworkInformation;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MyBoards.Entities.WorkItems
 {
@@ -12,8 +14,6 @@ namespace MyBoards.Entities.WorkItems
 
         public string IterationPath { get; set; }
         public int Priority { get; set; }
-       
-
 
 
         public List<Comment> Comments { get; set; } = new List<Comment>();
