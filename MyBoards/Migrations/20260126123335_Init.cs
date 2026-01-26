@@ -12,7 +12,7 @@ namespace MyBoards.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "StatesDb",
+                name: "States",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,11 +21,11 @@ namespace MyBoards.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StatesDb", x => x.Id);
+                    table.PrimaryKey("PK_States", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TagsDb",
+                name: "Tags",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -34,11 +34,11 @@ namespace MyBoards.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TagsDb", x => x.Id);
+                    table.PrimaryKey("PK_Tags", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersDb",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -48,11 +48,11 @@ namespace MyBoards.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersDb", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AddressesDb",
+                name: "Addresses",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -64,17 +64,17 @@ namespace MyBoards.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AddressesDb", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AddressesDb_UsersDb_UserId",
+                        name: "FK_Addresses_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "UsersDb",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkItemsDb",
+                name: "WorkItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -93,23 +93,23 @@ namespace MyBoards.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkItemsDb", x => x.Id);
+                    table.PrimaryKey("PK_WorkItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkItemsDb_StatesDb_StateId",
+                        name: "FK_WorkItems_States_StateId",
                         column: x => x.StateId,
-                        principalTable: "StatesDb",
+                        principalTable: "States",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WorkItemsDb_UsersDb_AuthorId",
+                        name: "FK_WorkItems_Users_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "UsersDb",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommentsDb",
+                name: "Comments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -122,11 +122,11 @@ namespace MyBoards.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommentsDb", x => x.Id);
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CommentsDb_WorkItemsDb_WorkItemId",
+                        name: "FK_Comments_WorkItems_WorkItemId",
                         column: x => x.WorkItemId,
-                        principalTable: "WorkItemsDb",
+                        principalTable: "WorkItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -143,38 +143,38 @@ namespace MyBoards.Migrations
                 {
                     table.PrimaryKey("PK_WorkItemTag", x => new { x.TagId, x.WorkItemId });
                     table.ForeignKey(
-                        name: "FK_WorkItemTag_TagsDb_TagId",
+                        name: "FK_WorkItemTag_Tags_TagId",
                         column: x => x.TagId,
-                        principalTable: "TagsDb",
+                        principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WorkItemTag_WorkItemsDb_WorkItemId",
+                        name: "FK_WorkItemTag_WorkItems_WorkItemId",
                         column: x => x.WorkItemId,
-                        principalTable: "WorkItemsDb",
+                        principalTable: "WorkItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddressesDb_UserId",
-                table: "AddressesDb",
+                name: "IX_Addresses_UserId",
+                table: "Addresses",
                 column: "UserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommentsDb_WorkItemId",
-                table: "CommentsDb",
+                name: "IX_Comments_WorkItemId",
+                table: "Comments",
                 column: "WorkItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkItemsDb_AuthorId",
-                table: "WorkItemsDb",
+                name: "IX_WorkItems_AuthorId",
+                table: "WorkItems",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkItemsDb_StateId",
-                table: "WorkItemsDb",
+                name: "IX_WorkItems_StateId",
+                table: "WorkItems",
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
@@ -187,25 +187,25 @@ namespace MyBoards.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AddressesDb");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "CommentsDb");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "WorkItemTag");
 
             migrationBuilder.DropTable(
-                name: "TagsDb");
+                name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "WorkItemsDb");
+                name: "WorkItems");
 
             migrationBuilder.DropTable(
-                name: "StatesDb");
+                name: "States");
 
             migrationBuilder.DropTable(
-                name: "UsersDb");
+                name: "Users");
         }
     }
 }

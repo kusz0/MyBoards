@@ -48,7 +48,7 @@ namespace MyBoards.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("AddressesDb");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("MyBoards.Entities.Comment", b =>
@@ -81,7 +81,7 @@ namespace MyBoards.Migrations
 
                     b.HasIndex("WorkItemId");
 
-                    b.ToTable("CommentsDb");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("MyBoards.Entities.State", b =>
@@ -99,7 +99,7 @@ namespace MyBoards.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StatesDb");
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("MyBoards.Entities.Tag", b =>
@@ -115,7 +115,7 @@ namespace MyBoards.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TagsDb");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("MyBoards.Entities.User", b =>
@@ -135,7 +135,7 @@ namespace MyBoards.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UsersDb");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("MyBoards.Entities.WorkItemTag", b =>
@@ -195,7 +195,7 @@ namespace MyBoards.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("WorkItemsDb");
+                    b.ToTable("WorkItems");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("WorkItem");
 

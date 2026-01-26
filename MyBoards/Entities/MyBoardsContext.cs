@@ -13,15 +13,15 @@ namespace MyBoards.Entities
             
         }
 
-        public DbSet<WorkItem> WorkItemsDb{ get; set; }
-        public DbSet<Epic> EpicDb{ get; set; }
-        public DbSet<Task> TaskDb{ get; set; }
-        public DbSet<Issue> IssueDb { get; set; }
-        public DbSet<User> UsersDb { get; set; }
-        public DbSet<Tag> TagsDb { get; set; }
-        public DbSet<Comment> CommentsDb { get; set; }
-        public DbSet<Address> AddressesDb { get; set; }
-        public DbSet<State> StatesDb { get; set; }
+        public DbSet<WorkItem> WorkItems{ get; set; }
+        public DbSet<Epic> Epic{ get; set; }
+        public DbSet<Task> Task{ get; set; }
+        public DbSet<Issue> Issue { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<State> States { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
