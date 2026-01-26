@@ -61,10 +61,7 @@ namespace MyBoards.Entities
             // Relations
             modelBuilder.Entity<User>().HasOne(u => u.Address).WithOne(a => a.User).HasForeignKey<Address>(a => a.UserId);
 
-            modelBuilder.Entity<State>(st =>
-            {
-                st.Property(x => x.Value).IsRequired().HasMaxLength(50);
-            });
+            modelBuilder.Entity<State>().Property(x => x.Value).IsRequired().HasMaxLength(60);
             
 
         }
