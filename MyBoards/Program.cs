@@ -30,11 +30,17 @@ namespace MyBoards
                 app.UseSwaggerUI();
             }
 
-            app.UseAuthorization();
-
+            using var scope = app.Services.CreateScope();
+            var dbContext = scope.ServiceProvider.GetService<MyBoardsContext>();
            
-         
+            var pendingMigrations = dbContext.Database.GetPendingMigrations();
+            if(pendingMigrations.Any())
+            {
+                dbContext.Database.Migrate();
+            }
 
+
+            app.UseAuthorization();
             app.Run();
         }
     }
