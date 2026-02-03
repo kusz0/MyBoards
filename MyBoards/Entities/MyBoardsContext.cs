@@ -60,6 +60,8 @@ namespace MyBoards.Entities
 
             // Relations
             modelBuilder.Entity<User>().HasOne(u => u.Address).WithOne(a => a.User).HasForeignKey<Address>(a => a.UserId);
+            modelBuilder.Entity<User>().HasMany(u => u.Comments).WithOne(a => a.Author).HasForeignKey(c => c.AuthorId);
+
 
             modelBuilder.Entity<State>().Property(x => x.Value).IsRequired().HasMaxLength(60);
             

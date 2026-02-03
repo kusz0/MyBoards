@@ -6,7 +6,6 @@ namespace MyBoards.Entities
     {
         public int Id { get; set; }
         public string Message { get; set; }
-        public string Author { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdateTime { get; set; }
@@ -15,6 +14,7 @@ namespace MyBoards.Entities
         public int WorkItemId { get; set; }
 
 
-
+        public Guid AuthorId { get; set; }
+        public User Author { get; set; }
     }
 }
