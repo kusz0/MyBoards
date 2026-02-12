@@ -12,8 +12,8 @@ using MyBoards.Entities;
 namespace MyBoards.Migrations
 {
     [DbContext(typeof(MyBoardsContext))]
-    [Migration("20260210225024_user-commetReltion")]
-    partial class usercommetReltion
+    [Migration("20260212035517_WorkItemStateSeed")]
+    partial class WorkItemStateSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -140,6 +140,39 @@ namespace MyBoards.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("MyBoards.Entities.WorkItemState", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkItemState");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Value = "To do"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Value = "Doing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Value = "Done"
+                        });
+                });
+
             modelBuilder.Entity("MyBoards.Entities.WorkItemTag", b =>
                 {
                     b.Property<int>("TagId")
@@ -259,7 +292,7 @@ namespace MyBoards.Migrations
                     b.HasOne("MyBoards.Entities.User", "Author")
                         .WithMany("Comments")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("MyBoards.Entities.WorkItems.WorkItem", "WorkItem")

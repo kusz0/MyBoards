@@ -56,7 +56,8 @@ namespace MyBoards.Entities
             {
                 eb.Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
                 eb.Property(x => x.UpdateTime).ValueGeneratedOnUpdate();
-                eb.HasOne(x => x.Author).WithMany(c => c.Comments).HasForeignKey(c => c.AuthorId);
+                eb.HasOne(x => x.Author).WithMany(c => c.Comments).HasForeignKey(c => c.AuthorId)
+                .OnDelete(DeleteBehavior.NoAction);
             });
 
             // Relations
@@ -64,7 +65,12 @@ namespace MyBoards.Entities
 
 
             modelBuilder.Entity<State>().Property(x => x.Value).IsRequired().HasMaxLength(60);
-            
+
+            modelBuilder.Entity<WorkItemState>().HasData(
+                new WorkItemState() {Id = 1 ,Value = "To do"},
+                new WorkItemState() { Id = 2 ,Value = "Doing"},
+                new WorkItemState() { Id = 3,  Value = "Done"}
+                );
 
         }
         
