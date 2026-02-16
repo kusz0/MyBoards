@@ -38,7 +38,34 @@ namespace MyBoards
             {
                 dbContext.Database.Migrate();
             }
+            var users = dbContext.Users.ToList();
 
+            if(!users.Any())
+            {
+                var user1 = new User()
+                {
+                    Email = "user1@test.com",
+                    FullName = "Ryszard Stonoga",
+                    Address = new Address()
+                    {
+                        City = "Warszawa",
+                        Street = "Miodowa"
+                    }
+                };
+                var user2 = new User()
+                {
+                    Email = "user1@test.com",
+                    FullName = "Kamil Stoch",
+                    Address = new Address()
+                    {
+                        City = "Krakow",
+                        Street = "Szeroka"
+                    }
+                };
+
+                dbContext.Users.AddRange(user1,user2);
+                dbContext.SaveChanges();
+            }
 
             app.UseAuthorization();
             app.Run();
