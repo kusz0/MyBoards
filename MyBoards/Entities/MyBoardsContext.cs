@@ -71,6 +71,13 @@ namespace MyBoards.Entities
                 new WorkItemState() { Id = 2 ,Value = "Doing"},
                 new WorkItemState() { Id = 3,  Value = "Done"}
                 );
+            modelBuilder.Entity<Tag>().HasData(
+                new Tag() {Id = 1, Value="Web"},
+                new Tag() { Id = 2, Value = "UI" },
+                new Tag() { Id = 3, Value = "Desktop" },
+                new Tag() { Id = 4, Value = "Api" },
+                new Tag() { Id = 5, Value = "Service" }
+                );
 
         }
         

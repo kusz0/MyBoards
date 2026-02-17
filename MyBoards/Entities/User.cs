@@ -18,4 +18,4 @@ namespace MyBoards.Entities
 
         public List<Comment> Comments { get; set; } = new List<Comment>();
     }
-}
+} 
