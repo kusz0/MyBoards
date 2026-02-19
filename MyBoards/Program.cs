@@ -70,8 +70,9 @@ namespace MyBoards
 
             app.MapGet("data", (MyBoardsContext db) =>
             {
-                var tags = db.Tags.ToList();
-                return tags;
+                var epic = db.Epic.First();
+                var user = db.Users.First(u => u.FullName == "User One");
+                return new {epic,user};
             });
 
 
