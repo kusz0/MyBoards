@@ -12,8 +12,8 @@ using MyBoards.Entities;
 namespace MyBoards.Migrations
 {
     [DbContext(typeof(MyBoardsContext))]
-    [Migration("20260212035517_WorkItemStateSeed")]
-    partial class WorkItemStateSeed
+    [Migration("20260219164205_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,6 +121,33 @@ namespace MyBoards.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Value = "Web"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Value = "UI"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Value = "Desktop"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Value = "Api"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Value = "Service"
+                        });
                 });
 
             modelBuilder.Entity("MyBoards.Entities.User", b =>

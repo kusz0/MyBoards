@@ -67,6 +67,14 @@ namespace MyBoards
                 dbContext.SaveChanges();
             }
 
+
+            app.MapGet("data", (MyBoardsContext db) =>
+            {
+                var tags = db.Tags.ToList();
+                return tags;
+            });
+
+
             app.UseAuthorization();
             app.Run();
         }
